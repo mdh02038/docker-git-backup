@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Iain Mckay <me@iainmckay.co.uk>
+MAINTAINER Mark Hummel <mdh@raquette.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV MYSQL_HOST 127.0.0.1
@@ -14,7 +14,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
-    && pip install awscli
+    && pip install b2
 
 ADD start.sh /start.sh
 

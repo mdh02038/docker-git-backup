@@ -36,7 +36,7 @@ if [ "$1" == "backup" ]; then
         mysqldump --force --opt --host=$MYSQL_HOST --port=$MYSQL_PORT --user=$MYSQL_USER --databases $db ${PASS_OPT} | gzip > "/tmp/$db.gz"
 
         if [ $? == 0 ]; then
-            aws s3 cp /tmp/$db.gz s3://$S3_BUCKET/$S3_PATH/$db.gz
+	    b2 upload_file $BB_BUCKET /tmp/$db.gz $BB_PATH/$db.gz
 
             if [ $? == 0 ]; then
                 rm /tmp/$db.gz
@@ -51,7 +51,7 @@ elif [ "$1" == "restore" ]; then
     if [ -n "$2" ]; then
         archives=$2.gz
     else
-        archives=`aws s3 ls s3://$S3_BUCKET/$S3_PATH/ | awk '{print $4}' ${EXCLUDE_OPT}`
+        archives=`b2 ls $BB_BUCKET | awk '{print $4}' ${EXCLUDE_OPT}`
     fi
 
     for archive in $archives; do
@@ -60,7 +60,7 @@ elif [ "$1" == "restore" ]; then
         echo "restoring $archive"
         echo "...transferring"
 
-        aws s3 cp s3://$S3_BUCKET/$S3_PATH/$archive $tmp
+        b2 download_file_by_name $BB_BUCKET $BB_PATH/$archive $tmp
 
         if [ $? == 0 ]; then
             echo "...restoring"
