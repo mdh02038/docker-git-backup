@@ -3,13 +3,13 @@
 Container that backs up MySQL databases to Backblaze. The container overwrites the same Backblaze object every time it is run, it is recommended you turn
 versioning on to retain access to previous copies.
 
-There is an existing image available on the public registry at [mdh02038/mysql-backup](https://registry.hub.docker.com/u/mdh02038/mysql-backup/).
+There is an existing image available on the public registry at [raquette/mysql-backup](https://registry.hub.docker.com/u/raquette/mysql-backup/).
 
 ## Backing up
 
 To backup run:
 
-    $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password mdh02038/mysql-backup backup
+    $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password raquette/mysql-backup backup
 
 You can provide an extra argument with a specific database to backup.
 
@@ -17,7 +17,7 @@ You can provide an extra argument with a specific database to backup.
 
 To restore an existing backup run:
 
-    $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password mdh02038/mysql-backup restore
+    $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password raquette/mysql-backup restore
 
 It is important to note that if this database already exists on your server, this process will drop it first. You can also provide an extra argument with a specific database to restore.
 
@@ -27,7 +27,7 @@ You can exclude databases from backup/restore by using --exclude.
 
 For example:
 
-	$ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password mdh02038/mysql-backup --exclude=some_database,another_database restore
+	$ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password raquette/mysql-backup --exclude=some_database,another_database restore
 
 ## Configuration 
 
