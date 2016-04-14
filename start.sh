@@ -15,13 +15,15 @@ for i in "$@"; do
     esac
 done
 
-if [ -n $MYSQL_PASSWORD ]; then
+if [[ -n $MYSQL_PASSWORD ]]; then
     PASS_OPT="--password=${MYSQL_PASSWORD}"
 fi
 
-if [ -n $EXCLUDE_OPT ]; then
+if [[ -n $EXCLUDE_OPT ]]; then
     EXCLUDE_OPT="| grep -Ev (${EXCLUDE_OPT//,/|})"
 fi
+
+b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
 
 if [ "$1" == "backup" ]; then
     if [ -n "$2" ]; then
