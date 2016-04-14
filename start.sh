@@ -2,6 +2,7 @@
 
 EXCLUDE_OPT=
 PASS_OPT=
+CRON_OPT="* * * * *"
 
 for i in "$@"; do
     case $i in
@@ -22,6 +23,16 @@ fi
 if [[ -n $EXCLUDE_OPT ]]; then
     EXCLUDE_OPT="| grep -Ev (${EXCLUDE_OPT//,/|})"
 fi
+
+if [ "$1" == "cron_backup" ]; then
+    args = $@
+    shift args
+    echo "$CRON_OPT root $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
+    chmod 0644 /etc/cron.d/hello-cron
+    touch /var/log/cron.log
+    cron && tail -f /var/log/cron.log;
+fi
+
 
 b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
 
@@ -87,3 +98,5 @@ else
     >&2 echo "You must provide either backup or restore to run this container"
     exit 64
 fi
+
+b2 clear_account

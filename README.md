@@ -7,9 +7,15 @@ There is an existing image available on the public registry at [raquette/docker-
 
 ## Backing up
 
-To backup run:
+To backup run once:
 
     $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password raquette/docker-mysql-backup backup
+
+You can provide an extra argument with a specific database to backup.
+
+To backup run periodically:
+:
+    $ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password -e CRONTAB="* * * * *" raquette/docker-mysql-backup cron_backup
 
 You can provide an extra argument with a specific database to backup.
 
@@ -45,3 +51,4 @@ RESTORE_DB_CHARSET | utf8 | Which charset to recreate the database with
 RESTORE_DB_COLLATION | utf8_bin | Which collation to recreate the database with
 BB_BUCKET | `blank` | The bucket to write the backup to
 BB_PATH | `blank` | The path within the bucket
+CRONTAB | `* * * * *` | crontab schedule 
