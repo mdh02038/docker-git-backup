@@ -79,6 +79,7 @@ elif [ "$1" == "restore" ]; then
         archives=`/usr/local/bin/b2 ls $BB_BUCKET $BB_PATH ${EXCLUDE_OPT}`
     fi
 
+    mkdir -p /tmp/$BB_PATH
     for archive in $archives; do
         tmp=/tmp/$archive
 
