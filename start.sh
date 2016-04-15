@@ -27,7 +27,18 @@ fi
 if [ "$1" == "cron_backup" ]; then
     shift
     args="$@"
-    echo "$CRON_OPT root /start.sh backup $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
+    echo "$CRON_OPT root \
+	BB_ACCOUNT_ID=$BB_ACCOUNT \
+	BB_APPLICATION_KEY=$BB_APPLICATION_KEY \
+	MYSQL_HOST=$MYSQL_HOST \
+	MYSQL_PORT=$MYSQL_PORT \
+	MYSQL_USER=$MYSQL_USER \
+	MYSQL_PASSWORD=$MYSQL_PASSWORD \
+	RESTORE_DB_CHARSET=$RESTORE_DB_CHARSET \
+	RESTORE_DB_COLLATION=$RESTORE_DB_COLLATION \
+	BB_BUCKET=$BB_BUCKET \
+	BB_PATH=$BB_PATH \
+	/start.sh backup $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
     chmod 0644 /etc/cron.d/backup
     touch /var/log/cron.log
     cron && tail -f /var/log/cron.log;
