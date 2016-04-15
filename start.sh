@@ -35,7 +35,7 @@ fi
 
 
 
-b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
+/usr/local/bin/b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
 
 if [ "$1" == "backup" ]; then
     if [ -n "$2" ]; then
@@ -50,7 +50,7 @@ if [ "$1" == "backup" ]; then
         mysqldump --force --opt --host=$MYSQL_HOST --port=$MYSQL_PORT --user=$MYSQL_USER --databases $db ${PASS_OPT} | gzip > "/tmp/$db.gz"
 
         if [ $? == 0 ]; then
-	    b2 upload_file $BB_BUCKET /tmp/$db.gz $BB_PATH/$db.gz
+	    /usr/local/bin/b2 upload_file $BB_BUCKET /tmp/$db.gz $BB_PATH/$db.gz
 
             if [ $? == 0 ]; then
                 rm /tmp/$db.gz
@@ -65,7 +65,7 @@ elif [ "$1" == "restore" ]; then
     if [ -n "$2" ]; then
         archives=$2.gz
     else
-        archives=`b2 ls $BB_BUCKET | awk '{print $4}' ${EXCLUDE_OPT}`
+        archives=`/usr/local/bin/b2 ls $BB_BUCKET | awk '{print $4}' ${EXCLUDE_OPT}`
     fi
 
     for archive in $archives; do
@@ -74,7 +74,7 @@ elif [ "$1" == "restore" ]; then
         echo "restoring $archive"
         echo "...transferring"
 
-        b2 download_file_by_name $BB_BUCKET $BB_PATH/$archive $tmp
+        /usr/local/bin/b2 download_file_by_name $BB_BUCKET $BB_PATH/$archive $tmp
 
         if [ $? == 0 ]; then
             echo "...restoring"
@@ -100,4 +100,4 @@ else
     exit 64
 fi
 
-b2 clear_account
+/usr/local/bin/b2 clear_account
