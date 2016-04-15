@@ -76,7 +76,7 @@ elif [ "$1" == "restore" ]; then
     if [ -n "$2" ]; then
         archives=$2.gz
     else
-        archives=`/usr/local/bin/b2 ls $BB_BUCKET | awk '{print $4}' ${EXCLUDE_OPT}`
+        archives=`/usr/local/bin/b2 ls $BB_BUCKET $BB_PATH ${EXCLUDE_OPT}`
     fi
 
     for archive in $archives; do
@@ -85,7 +85,8 @@ elif [ "$1" == "restore" ]; then
         echo "restoring $archive"
         echo "...transferring"
 
-        /usr/local/bin/b2 download_file_by_name $BB_BUCKET $BB_PATH/$archive $tmp
+        /usr/local/bin/b2 download_file_by_name $BB_BUCKET $archive $tmp
+
 
         if [ $? == 0 ]; then
             echo "...restoring"
