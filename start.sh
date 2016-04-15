@@ -25,13 +25,14 @@ if [[ -n $EXCLUDE_OPT ]]; then
 fi
 
 if [ "$1" == "cron_backup" ]; then
-    args = $@
-    shift args
+    shift
+    args="$@"
     echo "$CRON_OPT root $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
     chmod 0644 /etc/cron.d/hello-cron
     touch /var/log/cron.log
     cron && tail -f /var/log/cron.log;
 fi
+
 
 
 b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
