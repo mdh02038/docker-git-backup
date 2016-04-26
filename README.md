@@ -52,3 +52,4 @@ RESTORE_DB_COLLATION | utf8_bin | Which collation to recreate the database with
 BB_BUCKET | `blank` | The bucket to write the backup to
 BB_PATH | `blank` | The path within the bucket
 CRONTAB | `* * * * *` | crontab schedule 
+WAIT_FOR_SERVER | `yes` | wait for server connect to be ready [yes,no]

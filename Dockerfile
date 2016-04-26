@@ -17,5 +17,6 @@ RUN apt-get update \
     && pip install b2
 
 ADD start.sh /start.sh
+ADD wait.sh /wait.sh
 
 ENTRYPOINT ["/start.sh"]

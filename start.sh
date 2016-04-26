@@ -3,6 +3,7 @@
 EXCLUDE_OPT=
 PASS_OPT=
 CRON_OPT="* * * * *"
+WAIT_FOR_SERVER="yes"
 
 for i in "$@"; do
     case $i in
@@ -15,6 +16,13 @@ for i in "$@"; do
         ;;
     esac
 done
+
+if [[ ${WAIT_FOR_SERVER}x == "yesx" ]] 
+	MYSQL_HOST=$MYSQL_HOST \
+	MYSQL_PORT=$MYSQL_PORT \
+	MYSQL_USER=$MYSQL_USER \
+	/wait.sh
+fi
 
 if [[ -n $MYSQL_PASSWORD ]]; then
     PASS_OPT="--password=${MYSQL_PASSWORD}"
