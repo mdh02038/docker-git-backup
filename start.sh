@@ -3,7 +3,6 @@
 EXCLUDE_OPT=
 PASS_OPT=
 CRON_OPT="* * * * *"
-WAIT_FOR_SERVER="yes"
 
 for i in "$@"; do
     case $i in
@@ -17,7 +16,7 @@ for i in "$@"; do
     esac
 done
 
-if [[ ${WAIT_FOR_SERVER}x == "yesx" ]] 
+if [[ ${WAIT_FOR_SERVER}x == "yesx" ]]; then
 	MYSQL_HOST=$MYSQL_HOST \
 	MYSQL_PORT=$MYSQL_PORT \
 	MYSQL_USER=$MYSQL_USER \

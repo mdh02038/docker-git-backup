@@ -8,6 +8,7 @@ ENV MYSQL_USER root
 ENV RESTORE_DB_CHARSET utf8
 ENV RESTORE_DB_COLLATION utf8_bin
 ENV S3_PATH mysql
+ENV WAIT_FOR_SERVER yes
 
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends python-pip mysql-client \
