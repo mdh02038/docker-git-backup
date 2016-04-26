@@ -35,6 +35,10 @@ For example:
 
 	$ docker run -e BB_ACCOUT_ID=accountId -e BB_APPLICATION_KEY=applicationKey -e BB_BUCKET=bucket -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_PASSWORD=password raquette/docker-mysql-backup --exclude=some_database,another_database restore
 
+## Waiting for mysql server to run
+
+By default the container will wait for the mysql server to be up. To disable this set the env variable WAIT_FOR_SERVER=no .
+
 ## Configuration 
 
 The container can be customized with these environment variables:
