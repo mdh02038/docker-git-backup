@@ -17,6 +17,8 @@ RUN apt-get update \
     && rm -rf /tmp/* \
     && pip install b2
 
+VOLUME /status
+
 ADD start.sh /start.sh
 ADD wait.sh /wait.sh
 

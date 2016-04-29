@@ -39,6 +39,11 @@ For example:
 
 By default the container will wait for the mysql server to be up. To disable this set the env variable WAIT_FOR_SERVER=no .
 
+## Interlocks on backup and restore
+
+By defining RESTORE_ONCE=yes you can insure the data base is only restored once
+If BACKUP_AFTER_RESTORE_ONLY=yes is defined a backup will only be performed if the db was restored in the past.
+
 ## Configuration 
 
 The container can be customized with these environment variables:
@@ -57,3 +62,5 @@ BB_BUCKET | `blank` | The bucket to write the backup to
 BB_PATH | `blank` | The path within the bucket
 CRONTAB | `* * * * *` | crontab schedule 
 WAIT_FOR_SERVER | `yes` | wait for server connect to be ready [yes,no]
+RESTORE_ONCE | `yes` | only restore if there is no previous restore
+BACKUP_AFTER_RESTORE_ONLY | `yes` | only backup if db was previously restored

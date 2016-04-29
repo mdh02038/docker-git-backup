@@ -56,6 +56,13 @@ fi
 /usr/local/bin/b2 authorize_account $BB_ACCOUNT_ID $BB_APPLICATION_KEY 
 
 if [ "$1" == "backup" ]; then
+    if [ ${BACKUP_AFTER_RESTORE_ONLY}x == 'yesx' ]; then
+	if [ ! -f /status/restore ]; then
+            >&2 echo "skipping backup operation as container has never been restored"
+            exit 64
+	fi	
+    fi
+
     if [ -n "$2" ]; then
         databases=$2
     else
@@ -79,7 +86,15 @@ if [ "$1" == "backup" ]; then
             >&2 echo "couldn't dump $db"
         fi
     done
+    echo `date` > /status/backup
 elif [ "$1" == "restore" ]; then
+    if [ ${RESTORE_ONCE}x == 'yesx' ]; then
+	if [ -f /status/restore ]; then
+            >&2 echo "skipping restore operation as container has already been restored"
+            exit 64
+	fi	
+    fi
+
     if [ -n "$2" ]; then
         archives=$2.gz
     else
@@ -115,6 +130,7 @@ elif [ "$1" == "restore" ]; then
             rm $tmp
         fi
     done
+    echo `date` > /status/restore
 else
     >&2 echo "You must provide either backup or restore to run this container"
     exit 64
