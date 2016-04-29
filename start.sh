@@ -38,7 +38,7 @@ fi
 if [ "$1" == "cron_backup" ]; then
     shift
     args="$@"
-    echo "$CRON_OPT root \
+    echo "${CRON_OPT//\"/} root \
 	BB_ACCOUNT_ID=$BB_ACCOUNT_ID \
 	BB_APPLICATION_KEY=$BB_APPLICATION_KEY \
 	MYSQL_HOST=$MYSQL_HOST \
