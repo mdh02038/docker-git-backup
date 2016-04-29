@@ -49,6 +49,7 @@ if [ "$1" == "cron_backup" ]; then
 	RESTORE_DB_COLLATION=$RESTORE_DB_COLLATION \
 	BB_BUCKET=$BB_BUCKET \
 	BB_PATH=$BB_PATH \
+	BACKUP_AFTER_RESTORE_ONLY=$BACKUP_AFTER_RESTORE_ONLY \
 	/start.sh backup $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
     chmod 0644 /etc/cron.d/backup
     touch /var/log/cron.log
