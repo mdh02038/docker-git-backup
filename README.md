@@ -41,7 +41,7 @@ By default the container will wait for the mysql server to be up. To disable thi
 
 ## Interlocks on backup and restore
 
-By defining RESTORE_ONCE=yes you can insure the data base is only restored once
+By defining RESTORE_ONCE=yes you can insure the data base is only restored once.
 If BACKUP_AFTER_RESTORE_ONLY=yes is defined a backup will only be performed if the db was restored in the past.
 
 ## Configuration 
