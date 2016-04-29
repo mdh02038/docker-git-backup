@@ -23,6 +23,10 @@ if [[ ${WAIT_FOR_SERVER}x == "yesx" ]]; then
 	/wait.sh
 fi
 
+if [[ -n $CRONTAB ]]; then
+    CRON_OPT="${CRONTAB}"
+fi
+
 if [[ -n $MYSQL_PASSWORD ]]; then
     PASS_OPT="--password=${MYSQL_PASSWORD}"
 fi
