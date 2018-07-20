@@ -3,7 +3,7 @@ MAINTAINER Mark Hummel <mdh@raquette.com>
 
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV PATH /repo
+ENV REPO_PATH /repo
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends git &&\
