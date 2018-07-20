@@ -24,9 +24,7 @@ To restore an existing backup run:
 
     $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path raquette/docker-git-backup restore
     
-It is important to note that if this database already exists on your server, this process will update it.
-
-By default the container will wait for the mysql server to be up. To disable this set the env variable WAIT_FOR_SERVER=no .
+It is important to note that if this repo already exists on your server, a restore will update it.
 
 ## Configuration 
 
