@@ -14,9 +14,9 @@ To backup run once:
 
     $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path raquette/docker-git-backup backup
 
-To backup run periodically:
+To backup periodically:
 
-    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path -e CRONTAB="* * * * *" raquette/docker-git-backup backup
+    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path -e CRONTAB="* * * * *" raquette/docker-git-backup cron_backup
 
 ## Restoring
 
