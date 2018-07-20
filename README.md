@@ -1,4 +1,4 @@
-# docker-mysql-backup
+# docker-git-backup
 
 Container that backs up file by commiting them to git archives. 
 
