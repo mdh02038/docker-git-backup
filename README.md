@@ -1,9 +1,12 @@
 # docker-git-backup
 
-Container that backs up file by commiting them to git archives. 
+Container that backs up files by commiting them to git archives. 
 
 
 There is an existing image available on the public registry at [raquette/docker-git-backup](https://registry.hub.docker.com/u/raquette/docker-git-backup/).
+## Directory to backup
+
+The directory to backup can be changed to point to an attached volume
 
 ## Backing up
 
