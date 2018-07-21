@@ -32,7 +32,7 @@ if [ "$1" == "backup" ]; then
 elif [ "$1" == "restore" ]; then
     cd $REPO_PATH
     echo $KEY >> $REPO_PATH/key
-    git clone $URL -key $REPO_PATH/key
+    git clone $URL
     echo `date` > /status/restore
 else
     >&2 echo "You must provide either backup or restore to run this container"
