@@ -15,7 +15,7 @@ if [ "$1" == "cron_backup" ]; then
     echo "${CRON_OPT//\"/} root \
 	KEY=$KEY \
 	URL=$URL \
-	PATH=$PATH \
+	REPO_PATH=REPO_$PATH \
 	/start.sh backup $args >> /var/log/cron.log 2>&1" > /etc/cron.d/backup
     chmod 0644 /etc/cron.d/backup
     touch /var/log/cron.log
@@ -24,13 +24,13 @@ fi
 
 
 if [ "$1" == "backup" ]; then
-    mkdir -p $PATH
-    cd $PATH
+    mkdir -p $REPO_PATH
+    cd $REPO_PATH
     git add *
     git -key=$KEY commit $URL
     echo `date` > /status/backup
 elif [ "$1" == "restore" ]; then
-    cd $PATH
+    cd $REPO_PATH
     git checkout $URL
     echo `date` > /status/restore
 else
