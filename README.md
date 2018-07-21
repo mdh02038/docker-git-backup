@@ -12,17 +12,17 @@ The directory to backup can be changed to point to an attached volume
 
 To backup run once:
 
-    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path raquette/docker-git-backup backup
+    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e REPO_PATH=directory_path raquette/docker-git-backup backup
 
 To backup periodically:
 
-    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path -e CRONTAB="* * * * *" raquette/docker-git-backup cron_backup
+    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e REPO_PATH=directory_path -e CRONTAB="* * * * *" raquette/docker-git-backup cron_backup
 
 ## Restoring
 
 To restore an existing backup run:
 
-    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e PATH=directory_path raquette/docker-git-backup restore
+    $ docker run -e KEY=ssh-private-key -e URL=git-repo-url -e REPO_PATH=directory_path raquette/docker-git-backup restore
     
 It is important to note that if this repo already exists on your server, a restore will update it.
 
@@ -34,6 +34,6 @@ Name | Default Value | Description
 --- | --- | ---
 KEY | `blank` | ssh private key for git repo
 URL | `blank` | url pointing to repo
-PATH | /repo | directory to back up
+REPO_PATH | /repo | directory to back up
 CRONTAB | `* * * * *` | crontab schedule 
 
